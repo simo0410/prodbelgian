@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Films ProdBelgian{% endblock %}
+
+{% block body %}
+    <h1>liste des films</h1>
+    <ul>
+        {% for film in films %}
+            <li>
+                <h2>
+                    <a href="{{ path('app_film_show', {id: film.id}) }}">{{ film.titre }}</a>
+                </h2>
+
+                {# <h2>
+                    <a href="{{ path('app_artist_show', {id: artist.id}) }}">{{ artist.firstname|capitalize }} {{ artist.lastname|upper }}</a>
+                </h2>  #}
+
+                - {{ film.description }} - {{ film.categorie.nom }}
+
+                {% if film.artists is not empty %}
+                    {% for artist in film.artists %}
+                        <li>
+                            <h3>
+                                <a href="{{ path('app_artist_show', {id: artist.id}) }}">{{ artist.firstname }}{{ artist.lastname }}</a>
+                            </h3>
+                        </li>
+                        
+                    {% endfor %}
+                {% endif %}
+                
+            </li>   
+        {% endfor %}
+    </ul>
+
+{% endblock %}

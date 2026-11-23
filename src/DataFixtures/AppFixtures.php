@@ -12,6 +12,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        //Catégories
         $action = new Categorie();
         $action->setNom('action');
         $manager->persist($action);
@@ -28,35 +29,43 @@ class AppFixtures extends Fixture
         $romance->setNom('Romance');
         $manager->persist($romance);
 
-
+        //Artistes
         $tom = new Artist();
-        $tom->setFirstName('Cruise');
-        $tom->setlastName('Tom');
+        $tom->setFirstName('Tom');
+        $tom->setlastName('Cruise');
         $tom->setDatenaissance(new \DateTime('1966-09-04'));
         $tom->setSexe('M');
         $manager->persist($tom);
 
         $keanu = new Artist();
-        $keanu->setFirstName('Reeves');
-        $keanu->setlastName('keanu');
+        $keanu->setFirstName('keanu');
+        $keanu->setlastName('Reeves');
         $keanu->setDatenaissance(new \DateTime('1969-10-04'));
         $keanu->setSexe('M');
         $manager->persist($keanu);
 
         $kate = new Artist();
-        $kate->setFirstName('Winslet');
-        $kate->setlastName('Kate');
+        $kate->setFirstName('Kate');
+        $kate->setlastName('Winslet');
         $kate->setDatenaissance(new \DateTime('1970-04-04'));
         $kate->setSexe('F');
         $manager->persist($kate);
 
         $leonardo = new Artist();
-        $leonardo->setFirstName('DiCaprio');
-        $leonardo->setlastName('Leonardo');
+        $leonardo->setFirstName('Leonardo');
+        $leonardo->setlastName('Dicaprio');
         $leonardo->setDatenaissance(new \DateTime('1968-02-04'));
         $leonardo->setSexe('M');
         $manager->persist($leonardo);
 
+        $danzel = new Artist();
+        $danzel->setFirstName('Danzel');
+        $danzel->setlastName('Washington');
+        $danzel->setDatenaissance(new \DateTime('1963-02-04'));
+        $danzel->setSexe('M');
+        $manager->persist($danzel);
+        
+        //Films
         $titanic = new Film;
         $titanic->setTitre('Titanic');
         $titanic->setDescription('Un film romantique');
@@ -79,6 +88,12 @@ class AppFixtures extends Fixture
         $avatar->addArtist($keanu);
         $manager->persist($avatar);
 
+        $jfk = new Film;
+        $jfk->setTitre('JFK');
+        /*  $jfk->setDescription('Pas de description'); */
+        $jfk->setCategorie($comedie);
+        $jfk->addArtist($danzel);
+        $manager->persist($jfk);
 
         $manager->flush();
     }

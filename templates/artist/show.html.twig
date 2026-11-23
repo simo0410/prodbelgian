@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ artist.lastname }}{% endblock %}
+
+{% block body %}
+    <h1>{{ artist.firstname|capitalize }} {{ artist.lastname|upper }}</h1>
+    <p>
+        {{ artist.sexe == 'M' ? 'né' : 'née' }} le
+        {{ artist.dateNaissance|date('d/m/Y') }}
+    </p>
+
+    <h2>Ses films</h2>
+    <ul>
+        {% for film in artist.films %}
+            <li>{{ film.titre }}</li>
+        {% else %}
+            <li>Aucun film pour cet artiste !</li>
+        {% endfor %}
+    </ul>
+    
+
+      <ul>
+        {% for film in artist.films %}
+            <li>
+                <a href="{{ path('app_film_show', {id: film.id}) }}">{{ film.titre }}</a>
+            </li>
+        {% else %}
+                <li>
+                    Aucun film pour cet artiste !
+                </li>
+            
+        {% endfor %}
+    </ul> 
+
+     <a href="{{ path('app_film') }}">Retour à la liste</a>
+
+{% endblock %}
